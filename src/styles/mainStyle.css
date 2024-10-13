@@ -1,0 +1,97 @@
+:root {
+    --color_1: #EEF5FF;
+    --color_2: #B4D4FF;
+    --color_3: #86B6F6;
+    --color_4: #176B87;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 'Dancing Script', cursive;
+    font-size: 20px;
+    font-weight: 500;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    /* background */
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+        url('../assets/images/background.png');
+    background-position: bottom;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+    /* overflow */
+    overflow-x: hidden;
+}
+
+.center_item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.max_height {
+    min-height: 80vh;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+}
+
+/* Scroll */
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/*  swiper */
+
+.swiper-pagination-bullet {
+    width: 12px !important;
+    height: 12px !important;
+    background-color: var(--body_color) !important;
+}
+
+
+/* dropdown */
+.dropdown-menu_bg {
+    background-color: rgba(23, 107, 135, 0.7) !important;
+    border-color: var(--color_3) !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+.dropdown-menu_bg .dropdown-item {
+    transition: all 0.1s ease;
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.dropdown-menu_bg .dropdown-item:hover {
+    color: var(--color_4);
+
+    cursor: pointer;
+    background-color: rgba(238, 245, 255, 0.5);
+}

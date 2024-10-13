@@ -1,0 +1,112 @@
+.notes-for-us_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .container {
+    .row {
+      .notes_wrapper {
+        z-index: -1;
+        background-color: rgba(#b4d4ff, 0.4);
+        backdrop-filter: blur(20px);
+        box-shadow: rgba(#000, 0.3) 0 5px 15px;
+        padding: 2rem 0;
+        border-radius: 1rem;
+        .notes_title {
+          text-align: center;
+          font-size: 2rem;
+          font-weight: 600;
+          color: var(--color_1);
+        }
+        .notes_board {
+          // min-height: 50px;
+          max-height: 300px;
+          margin: 0.5rem 0;
+          scroll-behavior: smooth;
+          overflow-y: scroll;
+          scrollbar-width: none;
+          .empty_text {
+            text-align: center;
+            font-style: 2rem;
+            color: var(--color_1);
+            font-weight: 600;
+          }
+        }
+        .notes-input_wrapper {
+          margin-top: 2rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          .input {
+            position: relative;
+            width: 90%;
+            .note-input {
+              background-color: transparent;
+              // border: none;
+              border-radius: 0.5rem;
+              border: 1px solid var(--color_1);
+              color: #fff;
+              outline: none;
+              font-size: 1.5rem;
+            }
+            .note-input::placeholder {
+              color: #fff;
+              font-size: 1.5rem;
+            }
+            .btn-send {
+              position: absolute;
+              top: 0;
+              right: 0;
+              bottom: 0;
+              width: 3rem;
+              background-color: transparent;
+              border: none;
+              outline: none;
+              border-left: 1px solid var(--color_1);
+
+              i {
+                color: var(--color_1);
+                font-size: 2rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .notes-for-us_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .container {
+      .row {
+        .notes_wrapper {
+          .notes_title {
+            font-size: 1.5rem;
+          }
+          .notes_board {
+            height: 450px;
+          }
+          .notes_input {
+            margin-top: 2rem;
+            .notes-input {
+              font-size: 1rem;
+            }
+            .notes-input::placeholder {
+              color: #fff;
+              font-size: 1rem;
+            }
+            .btn-send {
+              i {
+                color: var(--color_1);
+                font-size: 1.5rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

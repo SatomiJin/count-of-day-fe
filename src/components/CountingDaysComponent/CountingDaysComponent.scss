@@ -1,0 +1,72 @@
+.counting-day_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  .container {
+    .row {
+      flex-direction: column;
+      .count-of-days {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background-color: rgba(#b4d4ff, 0.4);
+        box-shadow: rgba(#000, 0.4) 0px 5px 15px;
+        width: fit-content;
+        padding: 1rem 2rem;
+        color: #f5f5f5;
+        border-radius: 0.5rem;
+        backdrop-filter: blur(20px);
+        .title {
+          font-size: 2rem;
+          font-weight: 600;
+          text-transform: uppercase;
+        }
+        .value {
+          font-size: 3rem;
+          font-weight: 600;
+          margin: 1rem 0;
+          text-shadow: var(--color_4) 5px 0 15px;
+        }
+      }
+      .button_wrapper {
+        background-color: rgba(#b4d4ff, 0.4);
+        backdrop-filter: blur(20px);
+        box-shadow: rgba(#000, 0.3) 0 5px 15px;
+        margin-top: 2rem;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        text-align: center;
+        .btn_item {
+          position: relative;
+          font-size: 1.5rem;
+          text-align: center;
+          color: var(--color_1);
+          border: 0.4px solid var(--color_1);
+          z-index: 1;
+          transition: all 0.3s linear;
+
+          &:hover {
+            cursor: pointer;
+            color: var(--color_4);
+          }
+        }
+        .btn_item::before {
+          content: "";
+          z-index: -1;
+          position: absolute;
+          top: 0;
+          left: 0;
+          bottom: 0;
+          width: 0;
+          background-color: rgba(#fff, 0.4);
+          transition: all 0.3s linear;
+        }
+        .btn_item:hover::before {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

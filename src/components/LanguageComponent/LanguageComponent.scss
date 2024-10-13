@@ -1,0 +1,61 @@
+.language-component_container {
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .dropdown {
+    .dropdown_button {
+      .language_flag {
+        background-image: url("../../assets/images/VN_flag.png");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 40px;
+        width: 40px;
+        transition: all 0.3s ease;
+        &:hover {
+          cursor: pointer;
+          transform: scale(1.1);
+        }
+      }
+    }
+    .dropdown-menu {
+      border-color: var(--color_3);
+      backdrop-filter: blur(10px);
+      background-color: rgba(#176b87, 0.7) !important;
+      .dropdown-item {
+        transition: all 0.1s ease;
+        font-weight: 500;
+        font-size: 1.4rem;
+        color: var(--color_1);
+
+        &:hover {
+          color: var(--color_4);
+          font-weight: 600;
+
+          cursor: pointer;
+          background-color: rgba($color: #eef5ff, $alpha: 0.5);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .language-component_container {
+    .dropdown {
+      .dropdown_button {
+        .language_flag {
+          height: 35px !important;
+          width: 35px !important;
+        }
+      }
+      .dropdown-menu {
+        .dropdown-item {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}

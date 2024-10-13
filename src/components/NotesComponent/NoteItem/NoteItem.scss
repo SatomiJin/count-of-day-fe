@@ -1,0 +1,41 @@
+.note-item_container {
+  width: 100%;
+  padding: 0 2rem;
+  display: flex;
+
+  .wrapper {
+    background-color: rgba(#176b87, 0.5);
+    backdrop-filter: blur(10px);
+    padding: 1rem 0;
+    border-radius: 1rem;
+    color: var(--color_1);
+    margin-top: 1rem;
+    min-width: 200px;
+    padding: 1rem;
+    .note_time {
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .note_value {
+      font-size: 1.2rem;
+      margin-top: 0.5rem;
+      text-align: left;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .note-item_container {
+    .wrapper {
+      max-width: 80%;
+      .note_time {
+        font-size: 0.7rem;
+        font-weight: 700;
+      }
+      .note_value {
+        font-size: 1rem;
+        margin-top: 0.5rem;
+      }
+    }
+  }
+}
