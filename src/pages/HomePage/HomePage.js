@@ -17,7 +17,7 @@ function HomePage() {
               "Xuân phong thổi khởi tơ vân,
               <br /> Tương phùng vị tri, hỷ bi trùng trùng.
               <br /> Thiên lý chi ngoại, tâm tương luyến, <br />
-              Thời khắc tương ngộ, lòng thanh thản."
+              Ngày về sum họp, thắm tình thân."
               {/* Gió xuân khơi dậy mây lụa, Gặp nhau chưa biết, vui buồn chất chứa.
               Ngoài ngàn dặm xa xôi, lòng vẫn gắn bó, Thời khắc gặp lại, trong lòng thanh thản.*/}
             </div>

@@ -116,17 +116,19 @@ function HeaderComponent() {
                   >
                     {t("note")}
                   </li>
-                  {userInfo && userInfo?.email && (
+                  {userInfo && userInfo?.email ? (
                     <>
-                      {" "}
-                      s
                       <li className="dropdown-item" onClick={() => navigate("/profile")}>
                         {t("profile")}
                       </li>
-                      <li className="dropdown-item" onClick={() => navigate("/profile")}>
+                      <li className="dropdown-item" onClick={() => handleLogOut()}>
                         {t("logout")}
                       </li>
                     </>
+                  ) : (
+                    <li className="dropdown-item" onClick={() => navigate("/sign-in")}>
+                      {t("signIn")}
+                    </li>
                   )}
                 </ul>
               </div>

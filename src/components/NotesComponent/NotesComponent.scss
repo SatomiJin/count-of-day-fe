@@ -2,10 +2,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1;
   .container {
     .row {
       .notes_wrapper {
-        z-index: -1;
         background-color: rgba(#b4d4ff, 0.4);
         backdrop-filter: blur(20px);
         box-shadow: rgba(#000, 0.3) 0 5px 15px;
