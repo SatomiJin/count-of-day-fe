@@ -48,6 +48,8 @@ i18next.use(initReactI18next).init({
 
         plusDaySuccess: "Đã cộng thêm 1 ngày",
         plusDayError: "Bạn đã thực hôm nay rồi",
+
+        blankMessage: "Bạn không được để trống tin nhắn!!",
       },
     },
     en: {
@@ -90,6 +92,8 @@ i18next.use(initReactI18next).init({
 
         plusDaySuccess: "Added one day success!!",
         plusDayError: "You did it today! try later",
+
+        blankMessage: "You must not leave the message blank!!",
       },
     },
   },

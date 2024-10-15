@@ -11,10 +11,15 @@ import "./NotesComponent.scss";
 function NotesComponent() {
   let [messages, setMessages] = useState([]);
   let [message, setMessage] = useState("");
+  let [isLoading, setIsLoading] = useState(false);
   let dispatch = useDispatch();
   let { t } = useTranslation();
   let notes = useSelector((state) => state.notes);
   let user = useSelector((state) => state.user);
+
+  const resetField = () => {
+    setMessage("");
+  };
 
   const scrollBotBoard = () => {
     let messageBox = document.querySelector(`.notes_board`);
@@ -34,7 +39,10 @@ function NotesComponent() {
     }
   };
   const handleSendMessage = async () => {
+    setIsLoading(true);
     if (!message) {
+      setIsLoading(false);
+      toast.error(t("blankMessage"));
       return;
     } else {
       let note = {
@@ -45,16 +53,24 @@ function NotesComponent() {
 
       if (!message || !user.email) {
         toast.error(t("messageError"));
+        setIsLoading(false);
       } else {
         let res = await NoteService.createMessage(note);
         if (res && res.status === "OK") {
           dispatch(addNewMessage({ note: note }));
           toast.success(t("messageSuccess"));
+          setIsLoading(false);
+
+          resetField();
         }
       }
     }
   };
-
+  const handleOnKeyDown = (e) => {
+    if (e.key === "Enter" && message) {
+      handleSendMessage();
+    }
+  };
   useEffect(() => {
     if (notes && notes.data.length > 0) {
       setMessages([...notes.data]);
@@ -97,9 +113,10 @@ function NotesComponent() {
                     className="form-control note-input"
                     type="text"
                     onChange={(e) => handleOnchangeMessage(e)}
+                    onKeyDown={(e) => handleOnKeyDown(e)}
                   />
                   <button className="btn-send center_item" onClick={() => handleSendMessage()} type="button">
-                    <i className="bx bxs-send"></i>
+                    {isLoading ? <LoadingComponent /> : <i className="bx bxs-send"></i>}
                   </button>
                 </div>
               </div>
