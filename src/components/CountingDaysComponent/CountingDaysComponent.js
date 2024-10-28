@@ -26,6 +26,7 @@ function CountingDaysComponent() {
     if (user && user.email) {
       setIsLoading(true);
       let res = await CountService.plusCount(user);
+
       if (res && res.status === "OK") {
         toast.success(t("plusDaySuccess"));
         setIsLoading(false);
