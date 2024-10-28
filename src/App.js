@@ -10,7 +10,17 @@ import * as UserService from "./Services/UserService";
 import * as NoteService from "./Services/NoteService";
 import { updateMessageNote } from "./redux/NoteSlice/NoteSlice";
 import { resetUser, updateUser } from "./redux/UserSlice/UserSlider";
+import { useQuery } from "@tanstack/react-query";
+
 function App() {
+  const getAllMessage = async () => {
+    if (user && user.email) {
+      let res = await NoteService.getAllMessage({ email: user.email });
+      if (res && res.status === "OK") {
+        dispatch(updateMessageNote({ data: res.messages }));
+      }
+    }
+  };
   const dispatch = useDispatch();
   let user = useSelector((state) => state.user);
 
@@ -61,7 +71,11 @@ function App() {
       localStorage.setItem("language", navigator.language.split("-")[0]);
     }
   }, []);
-
+  useEffect(() => {
+    if (user && user.email) {
+      getAllMessage();
+    }
+  }, [user]);
   return (
     <div className="App">
       <Router>

@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import { jwtDecode } from "jwt-decode";
-import LoadingComponent from "../LoadingComponent/LoadingComponent";
-import * as UserService from "../../Services/UserService";
-import "./SignInComponent.scss";
 import { updateUser } from "../../redux/UserSlice/UserSlider";
 import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import LoadingComponent from "../LoadingComponent/LoadingComponent";
+import { useMutationHook } from "../../hooks/useMutationHook";
+import * as UserService from "../../Services/UserService";
+import "./SignInComponent.scss";
 
 function SignInComponent() {
   let [userInfo, setUserInfo] = useState({
@@ -19,7 +20,40 @@ function SignInComponent() {
   let dispatch = useDispatch();
   let user = useSelector((state) => state.user);
   let { t } = useTranslation();
-
+  let signInMutation = useMutationHook((data) => UserService.signIn(data));
+  let { data } = signInMutation;
+  // function
+  // let mutationSignIn = useMutation(
+  //   async () => {
+  //     let res = await UserService.signIn(userInfo);
+  //     if (res && res.status === "OK") {
+  //       localStorage.setItem("access_token", JSON.stringify(res && res.access_token));
+  //       localStorage.setItem("refresh_token", JSON.stringify(res && res.refresh_token));
+  //       return res.access_token; // Trả về access_token để sử dụng sau
+  //     } else {
+  //       throw new Error(t("signInError"));
+  //     }
+  //   },
+  //   {
+  //     onSuccess: async (access_token) => {
+  //       const decoded = jwtDecode(access_token);
+  //       //  call API
+  //       let res = await UserService.getDetailUser({ email: decoded.email });
+  //       if (res && res.status === "OK") {
+  //         const storage = localStorage.getItem("refresh_token");
+  //         const refresh_token = JSON.parse(storage);
+  //         const access_token = JSON.parse(localStorage.getItem("access_token"));
+  //         dispatch(updateUser({ ...res.user, access_token: access_token, refresh_token: refresh_token }));
+  //         navigate("/");
+  //         toast.success(t("signInSuccess"));
+  //       }
+  //     },
+  //     onError: (e) => {
+  //       console.log("Error:", e);
+  //       toast.error(t("signInError"));
+  //     },
+  //   }
+  // );
   const handleOnchange = (e) => {
     let copyState = { ...userInfo };
     copyState[e.target.name] = e.target.value;
@@ -35,27 +69,31 @@ function SignInComponent() {
   const handleSignIn = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    let res = await UserService.signIn(userInfo);
-    if (res && res.status === "OK") {
-      localStorage.setItem("access_token", JSON.stringify(res && res.access_token));
-      localStorage.setItem("refresh_token", JSON.stringify(res && res.refresh_token));
-      if (res && res.access_token) {
-        const decoded = res && jwtDecode(res.access_token);
+    await signInMutation.mutate(userInfo);
+  };
+
+  useEffect(() => {
+    if (data && data.status === "OK") {
+      if (data && data.access_token) {
+        localStorage.setItem("access_token", JSON.stringify(data && data.access_token));
+        localStorage.setItem("refresh_token", JSON.stringify(data && data.refresh_token));
+        const decoded = data && jwtDecode(data.access_token);
         handleGetDetailUser(decoded.email);
+      } else {
+        toast.success(t("signInError"));
+      }
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (user && user.firstName) {
+      if (user && user.firstName) {
         setIsLoading(false);
         navigate("/");
         toast.success(t("signInSuccess"));
       }
-    } else {
-      toast.error(t("signInError"));
-      setIsLoading(false);
     }
-  };
-
-  // useEffect(() => {
-  //   if (user && user.email) {
-  //   }
-  // }, [user]);
+  }, [user]);
   return (
     <div className="sign-in_container max_height">
       <form className="sign-in_form" onSubmit={handleSignIn}>

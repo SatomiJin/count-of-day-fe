@@ -30,14 +30,6 @@ function NotesComponent() {
     setMessage(e.target.value);
   };
 
-  const getAllMessage = async () => {
-    if (user && user.email) {
-      let res = await NoteService.getAllMessage({ email: user.email });
-      if (res && res.status === "OK") {
-        dispatch(updateMessageNote({ data: res.messages }));
-      }
-    }
-  };
   const handleSendMessage = async () => {
     setIsLoading(true);
     if (!message) {
@@ -76,11 +68,6 @@ function NotesComponent() {
       setMessages([...notes.data]);
     }
   }, [notes]);
-  useEffect(() => {
-    if (user && user.email) {
-      getAllMessage();
-    }
-  }, [user]);
 
   useEffect(() => {
     if (messages && messages.length > 0) {

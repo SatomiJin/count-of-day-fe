@@ -1,6 +1,7 @@
 import axios from "axios";
-export const axiosJWT = axios.create();
+import { useQuery } from "@tanstack/react-query";
 
+export const axiosJWT = axios.create();
 export const signIn = async (data) => {
   let res = await axios.post(`${process.env.REACT_APP_API_BACK_END}user/sign-in`, data);
   return res.data;

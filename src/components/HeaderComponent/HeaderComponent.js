@@ -9,9 +9,8 @@ import * as utils from "../../utils";
 import { resetMessageNote } from "../../redux/NoteSlice/NoteSlice";
 import { resetUser } from "../../redux/UserSlice/UserSlider";
 function HeaderComponent() {
-  let { t, i18n } = useTranslation();
+  let { t } = useTranslation();
   let [isLoading, setIsLoading] = useState(false);
-  let [userInfo, setUserInfo] = useState({});
   let navigate = useNavigate();
   let user = useSelector((state) => state.user);
   let dispatch = useDispatch();
@@ -19,19 +18,8 @@ function HeaderComponent() {
     utils.logout();
     dispatch(resetUser());
     dispatch(resetMessageNote());
-    // setUserInfo({});
     navigate("/");
   };
-
-  useEffect(() => {
-    setIsLoading(true);
-    if (user) {
-      setUserInfo({ ...user });
-      setIsLoading(false);
-    } else {
-      setIsLoading(false);
-    }
-  }, [user]);
 
   return (
     <div className="header-component_container">
@@ -52,18 +40,18 @@ function HeaderComponent() {
             </div>
             <div className="user-option_item user btn center_item">
               {isLoading === false ? (
-                userInfo && userInfo?.email ? (
+                user && user?.email ? (
                   <div className="dropdown">
                     <div type="button" id="dropdownMenuUser" data-bs-toggle="dropdown" aria-expanded="false">
-                      <div title={`${userInfo.firstName} ${userInfo.lastName}`} className="username">
-                        {userInfo && userInfo.email !== "" && userInfo.image === "" ? (
+                      <div title={`${user.firstName} ${user.lastName}`} className="username">
+                        {user && user.email !== "" && user.image === "" ? (
                           <i className="fa-solid fa-user"></i>
                         ) : (
-                          <img alt="avatar" src={userInfo && userInfo.image} />
+                          <img alt="avatar" src={user && user.image} />
                         )}
                         <div
                           style={{ width: "100px", overflow: "hidden", textOverflow: "ellipsis", textWrap: "nowrap" }}
-                        >{`${userInfo.firstName} ${userInfo.lastName}`}</div>
+                        >{`${user.firstName} ${user.lastName}`}</div>
                       </div>
                     </div>
 
@@ -107,7 +95,7 @@ function HeaderComponent() {
                   <li
                     className="dropdown-item"
                     onClick={() => {
-                      if (userInfo && userInfo?.email) {
+                      if (user && user?.email) {
                         navigate("/notes");
                       } else {
                         navigate("/sign-in");
@@ -116,7 +104,7 @@ function HeaderComponent() {
                   >
                     {t("note")}
                   </li>
-                  {userInfo && userInfo?.email ? (
+                  {user && user?.email ? (
                     <>
                       <li className="dropdown-item" onClick={() => navigate("/profile")}>
                         {t("profile")}
