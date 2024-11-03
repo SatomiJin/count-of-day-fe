@@ -16,6 +16,7 @@ function CountingDaysComponent() {
   const handleGetDay = async () => {
     setIsLoading(true);
     let res = await CountService.getDay(user);
+
     if (res && res.status === "OK") {
       setIsLoading(false);
       setCountDayInfo({ ...res.count });
