@@ -25,7 +25,9 @@ function HeaderComponent() {
     <div className="header-component_container">
       <div className="container">
         <div className="pc-header row">
-          <div className="app_name col col-4 center_item">{t("appName")}</div>
+          <div className="app_name col col-4 center_item" onClick={() => navigate("/")}>
+            {t("appName")}
+          </div>
           <div className="app_options col col-5">
             <div className="options_menu-item center_item" onClick={() => navigate("/count-days")}>
               {t("countDay")}
@@ -121,7 +123,9 @@ function HeaderComponent() {
                 </ul>
               </div>
             </div>
-            <div className="mobile-header_name center_item">{t("appName")}</div>
+            <div className="mobile-header_name center_item" onClick={() => navigate("/")}>
+              {t("appName")}
+            </div>
             <div className="mobile-header_language">
               <LanguageComponent />
             </div>
