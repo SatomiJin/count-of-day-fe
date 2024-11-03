@@ -23,37 +23,7 @@ function SignInComponent() {
   let signInMutation = useMutationHook((data) => UserService.signIn(data));
   let { data } = signInMutation;
   // function
-  // let mutationSignIn = useMutation(
-  //   async () => {
-  //     let res = await UserService.signIn(userInfo);
-  //     if (res && res.status === "OK") {
-  //       localStorage.setItem("access_token", JSON.stringify(res && res.access_token));
-  //       localStorage.setItem("refresh_token", JSON.stringify(res && res.refresh_token));
-  //       return res.access_token; // Trả về access_token để sử dụng sau
-  //     } else {
-  //       throw new Error(t("signInError"));
-  //     }
-  //   },
-  //   {
-  //     onSuccess: async (access_token) => {
-  //       const decoded = jwtDecode(access_token);
-  //       //  call API
-  //       let res = await UserService.getDetailUser({ email: decoded.email });
-  //       if (res && res.status === "OK") {
-  //         const storage = localStorage.getItem("refresh_token");
-  //         const refresh_token = JSON.parse(storage);
-  //         const access_token = JSON.parse(localStorage.getItem("access_token"));
-  //         dispatch(updateUser({ ...res.user, access_token: access_token, refresh_token: refresh_token }));
-  //         navigate("/");
-  //         toast.success(t("signInSuccess"));
-  //       }
-  //     },
-  //     onError: (e) => {
-  //       console.log("Error:", e);
-  //       toast.error(t("signInError"));
-  //     },
-  //   }
-  // );
+
   const handleOnchange = (e) => {
     let copyState = { ...userInfo };
     copyState[e.target.name] = e.target.value;

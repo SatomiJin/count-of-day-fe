@@ -6,6 +6,7 @@ import LoadingComponent from "../LoadingComponent/LoadingComponent";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+
 function CountingDaysComponent() {
   let { t } = useTranslation();
   let [countDayInfo, setCountDayInfo] = useState({});
@@ -40,6 +41,7 @@ function CountingDaysComponent() {
       navigate("/sign-in");
     }
   };
+
   useEffect(() => {
     handleGetDay();
   }, []);

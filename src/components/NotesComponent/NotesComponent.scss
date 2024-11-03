@@ -33,35 +33,53 @@
         }
         .notes-input_wrapper {
           margin-top: 2rem;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          padding: 0 2rem;
           .input {
-            position: relative;
-            width: 90%;
+            border: 1px solid var(--color_1);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            // width: 90%;
             .note-input {
               background-color: transparent;
-              // border: none;
-              border-radius: 0.5rem;
-              border: 1px solid var(--color_1);
-              color: #fff;
+              border: none;
               outline: none;
+              position: relative;
+              border-radius: 0.5rem;
+              color: #fff;
               font-size: 1.5rem;
+            }
+            .btn-emoji {
+              color: #fff;
+              cursor: pointer;
+              margin-right: 0.5rem;
+              position: relative;
+            }
+            .emoji_wrapper {
+              position: fixed;
+              top: 0;
+              left: 0;
+              right: 0;
+              bottom: 0;
+              background-color: transparent;
+
+              .emoji-board {
+                position: absolute;
+                top: 0;
+                right: 0;
+              }
             }
             .note-input::placeholder {
               color: #fff;
               font-size: 1.5rem;
             }
             .btn-send {
-              position: absolute;
-              top: 0;
-              right: 0;
-              bottom: 0;
               width: 3rem;
               background-color: transparent;
               border: none;
               outline: none;
-              border-left: 1px solid var(--color_1);
+              // border-left: 1px solid var(--color_1);
 
               i {
                 color: var(--color_1);

@@ -4,7 +4,7 @@ import NotesPage from "../pages/NotesPage/NotesPage";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
 import ProfilePage from "../pages/ProfilePage/ProfilePage";
 import SignInPage from "../pages/SignInPage/SignInPage";
-
+import test from "../components/test";
 export let routes = [
   {
     path: "/",
@@ -35,5 +35,10 @@ export let routes = [
     path: "*",
     // isLogin: true,
     page: NotFoundPage,
+  },
+  {
+    path: "/test",
+    // isLogin: true,
+    page: test,
   },
 ];

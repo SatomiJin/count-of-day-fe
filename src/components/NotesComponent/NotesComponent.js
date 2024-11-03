@@ -8,9 +8,14 @@ import { useTranslation } from "react-i18next";
 import * as NoteService from "../../Services/NoteService";
 import LoadingComponent from "../LoadingComponent/LoadingComponent";
 import "./NotesComponent.scss";
+import data from "@emoji-mart/data";
+// import Picker from "emoji-mart";
+import Picker from "@emoji-mart/react";
+
 function NotesComponent() {
   let [messages, setMessages] = useState([]);
   let [message, setMessage] = useState("");
+  let [isOpenEmoji, setIsOpenEmoji] = useState(false);
   let [isLoading, setIsLoading] = useState(false);
   let dispatch = useDispatch();
   let { t } = useTranslation();
@@ -32,6 +37,7 @@ function NotesComponent() {
 
   const handleSendMessage = async () => {
     setIsLoading(true);
+    setIsOpenEmoji(false);
     if (!message) {
       setIsLoading(false);
       toast.error(t("blankMessage"));
@@ -39,8 +45,10 @@ function NotesComponent() {
     } else {
       let note = {
         messageNote: message,
-        timeCreate: new Date(),
+        timeCreate: new Date().getTime(),
         email: user && user.email,
+        type: "message",
+        sticker: {},
       };
 
       if (!message || !user.email) {
@@ -48,6 +56,7 @@ function NotesComponent() {
         setIsLoading(false);
       } else {
         let res = await NoteService.createMessage(note);
+
         if (res && res.status === "OK") {
           dispatch(addNewMessage({ note: note }));
           toast.success(t("messageSuccess"));
@@ -58,6 +67,11 @@ function NotesComponent() {
       }
     }
   };
+
+  const handleSelectEmoji = (emoji) => {
+    setMessage((prev) => prev + emoji.native);
+  };
+
   const handleOnKeyDown = (e) => {
     if (e.key === "Enter" && message) {
       handleSendMessage();
@@ -102,9 +116,21 @@ function NotesComponent() {
                     onChange={(e) => handleOnchangeMessage(e)}
                     onKeyDown={(e) => handleOnKeyDown(e)}
                   />
-                  <button className="btn-send center_item" onClick={() => handleSendMessage()} type="button">
+
+                  <div
+                    onClick={() => setIsOpenEmoji(!isOpenEmoji)}
+                    style={{ display: `${isOpenEmoji === true ? "block" : "none"}` }}
+                    className="emoji_wrapper"
+                  >
+                    <div onClick={(e) => e.stopPropagation()} className="emoji-board">
+                      <Picker onEmojiSelect={handleSelectEmoji} data={data} />
+                    </div>
+                  </div>
+
+                  <i onClick={() => setIsOpenEmoji(!isOpenEmoji)} className="fa-regular fa-face-smile btn-emoji"></i>
+                  <div className="btn-send center_item" onClick={() => handleSendMessage()} type="button">
                     {isLoading ? <LoadingComponent /> : <i className="bx bxs-send"></i>}
-                  </button>
+                  </div>
                 </div>
               </div>
             </div>
